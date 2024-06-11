@@ -16,20 +16,21 @@
                             <div class="line"></div>
                         </div>
                         <div class="nav-dropdown-menu">
-                            <a href="#" class="current-link">Home</a>
+                            <a href="{% url "stack_overflow:home" %}" class="current-link">Home</a>
                             <h5>Public</h5>
                             <ul class="nav-ul">
                                 <li class="nav-item">
-                                    <i class="fas fa-globe-europe"></i>
-                                    <a href="" class="nav-link">Stack Overflow</a>
+                                    <!--<i class="fas fa-globe-europe"></i>-->
+                                    
+                                    <a href="{% url "stack_overflow:home" %}" class="nav-link"><i class="fab fa-stack-overflow"></i> Stack Overflow</a>
                                 </li>
-                                <li class="nav-item"><a href="#" class="nav-link">Tags</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link">Users</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-tag"></i> Tags</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-user"></i> Users</a></li>
                             </ul>
                             <h5>Find a Job</h5>
                             <ul class="nav-ul">
-                                <li class="nav-item"><a href="#" class="nav-link">Jobs</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link">Companies</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-suitcase"></i> Jobs</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-building"></i> Companies</a></li>
                             </ul>
                             <h5>Teams <a href="#" >What's this ?</a></h5>
                             <a href="#" class="nav-link">
@@ -41,7 +42,7 @@
         
                     <a href="" class="nav-icon">
                         <i class="fab fa-stack-overflow"></i>
-                        <a href="" style="text-decoration: none; color: black;"><div class="nav-icon-text">stack <span class="nav-bold-text">overflow</span></a>
+                        <a href="" style="text-decoration: none; color: black;"><div class="nav-icon-text">Stack <span class="nav-bold-text">Overflow</span></a>
                         <!-- <div class="nav-icon-text">stack <span class="nav-bold-text">overflow</span> -->
         
                         
@@ -87,13 +88,27 @@
                     <div class="search-btn">
                         <i class="fas fa-search"></i>
                     </div>
-                        <a href="" class="btn btn-login">Profile</a>
-                        <a href="" class="btn btn-register">Logout</a> 
-                        <a href="" class="btn btn-login">Log in</a>
-                        <a href="" class="btn btn-register">Sign up</a> 
+                    {% if user.is_authenticated %}
+                    <a href="{% url "user:profile" %}" class="btn btn-login">Profile</a>
+                    <a href="{% url "user:logout" %}" class="btn btn-register">Logout</a> 
+                    {% else %}
+                    <a href="{% url "user:login" %}" class="btn btn-login">Log in</a>
+                    <a href="{% url "user:register" %}" class="btn btn-register">Sign up</a> 
+                    {% endif %}
                 </div>
             </nav>
         </div>
+
+        <div style+"margin-top: 10px;">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        <h4 style="text-align:center;">{{ message }}</h4>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
     </header>
 
 {% endblock  %}

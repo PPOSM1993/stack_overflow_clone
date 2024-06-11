@@ -7,7 +7,6 @@ button.addEventListener('click', (event) => {
 
 
 /*Questions Section */
-
 let questions_img=[
     'https://cdn.sstatic.net/Img/home/illo-feats-ask.svg?v=b6cd07f0765a',
     'https://cdn.sstatic.net/Img/home/illo-feats-vote.svg?v=9d2eb0efdc17',
